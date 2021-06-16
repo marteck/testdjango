@@ -1,0 +1,66 @@
+{% extends 'chat/index.html' %}
+{% block body %}
+<div class="container center-align text">
+<h5>Hello, {{ username }}!</h5>
+</div>
+<div class="container center-align text">
+<h6><a href="{% url 'logout' %}"> Logout </a></h6>
+</div>
+<br>
+<div class="container">
+<div class="row">
+    <h6><i>List of registered users:</i> </h6>
+    <ul>
+        <li> <b>{{ users }} </b></li>
+    </ul>
+</div><br>
+
+
+
+    <form id="send" method="post" class="form">
+        {% csrf_token %}
+        <div class="row">
+            <input name="text"> Input your message here</input>
+        </div><br>
+        <div class="row">
+        <input name="recipient" id="id_recipient" type="text">
+            <label for="id_recipient">Enter recipient's name</label>
+            </div><br>
+        {% if not message %}
+        <P>Enter message!!!</P>
+        <div class="row">
+            <button class="btn" style="background-color: purple">Send</button>
+        </div>
+        {%else%}
+        <div class="row">
+            <button class="btn" style="background-color: purple">Send</button>
+        </div>
+        {% endif %}
+    </form>
+</div><br>
+<div class="container">
+    <form id="receive" method="get" class="form">
+
+        <div class="row">
+            <p>{{ username }}: <output name="result">{{ user_message }}</output></p><br><br>
+            </div>
+         <div class="row">
+            <p>{{ friend_name }}: <output name="result">{{ friend_message }}</output></p>
+        </div><br>
+
+        <div class="row">
+            <button class="btn" onClick="window.location.reload();" style="background-color: purple">Check answer</button>
+        </div>
+    </form>
+</div>
+
+
+
+
+
+
+{% for message in messages %}
+    <h2>{{ message.user }} {{ message.time }} {{ message.messages }}</h2>
+{% endfor %}
+
+{% endblock %}

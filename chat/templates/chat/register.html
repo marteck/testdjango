@@ -1,0 +1,37 @@
+{% extends 'chat/index.html' %}
+{% block form %}
+<h3>Register</h3>
+<form id="register" class="form" method="post">
+    {% csrf_token %}
+    <div class="row">
+        <input name="username" id="id_username" type="text">
+        <label for="id_username"><b>Input your name</b></label>
+    </div>
+    <br>
+    <div class="row">
+        <input name="password" id="id_password" type="password">
+        <label for="id_password"><b>Input some password</b></label>
+    </div>
+    <br>
+    <div class="row">
+        <input name="nickname" id="id_nickname" type="text">
+        <label for="id_nickname"><b>Input your nickname</b></label>
+    </div>
+    <br>
+    <div class="row">
+        <input name="age" id="id_age" type="number">
+        <label for="id_age"><b>Input your age</b></label>
+    </div>
+    <br>
+    {% block new_user %}
+    <div class="row">
+        <button class="btn" style="background-color: purple">Register</button>
+    </div>
+    <br>
+    <div class="row">
+        <a href="{% url 'index' %}" style="color: grey">Back</a>
+    </div>
+    {% endblock %}
+</form>
+{% endblock %}
+
